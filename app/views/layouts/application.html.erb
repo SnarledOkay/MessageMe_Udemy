@@ -29,6 +29,9 @@
 
   <body>
     <%= render 'layouts/navbar' %>
-    <%= yield %>
+    <div id = "page-content">
+      <%= render 'layouts/messages' %>
+      <%= yield %>
+    </div>
   </body>
 </html>
