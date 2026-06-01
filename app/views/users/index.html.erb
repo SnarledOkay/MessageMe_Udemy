@@ -1,0 +1,9 @@
+<h1 class="text-center mt-3">Friends List</h1>
+
+<% if @friends.empty? %>
+    <h6 class="text-center mt-3 fst-italic text-secondary">You have no friend at the moment.</h6>
+<% else %>
+    <% @friends.each do |friend| %>
+        <%= render 'friend',obj: friend %>
+    <% end %>
+<% end %>

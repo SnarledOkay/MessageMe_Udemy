@@ -1,1 +1,16 @@
-<h1>This is the Home Page</h1>
+<div class = "container" id="home-container">
+    <div class="jumbotron text-center text-white">
+        <h1 class="display-4">Welcome to Alpha Meo Meo!</h1>
+        <p class="lead">This is MessageMe, a home project made to message other people.</p>
+        <hr class="my-4">
+        <p>I love Zani :3</p>
+        <p class="lead">
+            <% if !logged_in? %>
+                <%= link_to "Sign up", sign_up_path, class: "btn btn-success btn-lg me-2" %>
+                <%= link_to "Log in", login_path, class: "btn btn-success btn-lg" %>
+            <% else %>
+                <%= link_to "Start messaging", chatrooms_path, class: "btn btn-success btn-lg" %>
+            <% end %>
+        </p>
+    </div>
+</div>

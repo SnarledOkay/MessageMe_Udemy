@@ -27,11 +27,12 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body class="d-flex flex-column">
     <%= render 'layouts/navbar' %>
     <div id = "page-content">
       <%= render 'layouts/messages' %>
       <%= yield %>
     </div>
+    <%= render 'layouts/footer' %>
   </body>
 </html>

@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="card col-4 p-2">
+        <h6 class="card-header fst-italic ps-3 pt-1 pb-1 text-secondary">
+            Been friend since <%= time_ago_in_words(obj.updated_at) %> ago
+        </h6>
+        <div class="card-body">
+            <% user = User.find(obj.receiver_id) %>
+            <h5 class="card-title"><%= user.username %></h5>
+            <6 class="card-text"><%= user.introduction %></h6>
+            <div>
+                <% current_user.id == obj.sender_id ? user_id = obj.receiver_id : user_id = obj.sender_id %>
+                <%= link_to "View profile", user_path(user_id), data:{turbo_method: :post}, class: "btn btn-info me-1 p-1" %>
+                <%= link_to "Unfriend", friendship_path(friend_id: obj.id), data:{turbo_method: :delete, turbo_confirm: "Do you want to unfriend this user?"}, class:"btn btn-danger p-1" %>
+            </div>
+        </div>
+    </div>
+</div>

@@ -14,4 +14,20 @@ class User < ApplicationRecord
     has_secure_password
     validates :password, length:{minimum:6}, allow_nil: true
     validates :password_confirmation, presence: true, if: -> {new_record? || !password.nil?}
+
+    has_many :friendships, foreign_key: :sender_id 
+    has_many :received_friendships, class_name: "Friendship", foreign_key: :receiver_id
+    has_many :sent_request, through: :friendships, source: :receiver
+    has_many :received_request, through: :friendships, source: :sender
+
+    def sent_request_to?(other_user)
+        friendships.exists?(receiver_id: other_user.id)
+    end
+    def receive_request_from?(other_user)
+        friendships.exists?(sender_id: other_user.id)
+    end
+    def friends_with?(other_user)
+        friendships.exists?(receiver_id: other_user.id,status:"accepted") ||
+        received_friendships.exists?(sender_id: other_user.id,status:"accepted")
+    end
 end

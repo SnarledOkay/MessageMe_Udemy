@@ -1,6 +1,7 @@
 <div class="container">
     <div class="row d-flex justify-content-center">
         <div class="col-8">
+            <%= render 'shared/errors', obj:@user %>
             <%= form_with(model:@user,class:"shadow p-3 mb-3 bg-success rounded",local:true, data:{turbo: false}) do |form| %>
                 <div class="form-group row mb-2">
                     <%= form.label :email, class:"col-2 col-form-label text-light"%>
@@ -15,9 +16,15 @@
                     </div>
                 </div>
                 <div class="form-group row mb-2">
-                    <%= form.label :telephone, "Phone number", class:"col-2 col-form-label text-light"%>
+                    <%= form.label :telephone, class:"col-2 col-form-label text-light"%>
                     <div class="col-10">
                         <%= form.text_field :telephone, class: "form-control shadow rounded p-2", placeholder:"Enter phone number" %>
+                    </div>
+                </div>
+                <div class="form-group row mb-2">
+                    <%= form.label :introduction, class:"col-2 col-form-label text-light"%>
+                    <div class="col-10">
+                        <%= form.text_field :telephone, class: "form-control shadow rounded p-2", placeholder:"Introduce yourself" %>
                     </div>
                 </div>
                 <div class="form-group row mb-2">

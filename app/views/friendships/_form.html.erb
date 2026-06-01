@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="card col-4 p-2">
+        <% if obj.sender_id == current_user.id %>
+            <h6 class="card-header fst-italic ps-3 pt-1 pb-1 text-secondary">Sent <%= time_ago_in_words(obj.created_at) %> ago</h6>
+            <div class="card-body">
+                <% user = User.find(obj.receiver_id) %>
+                <h5 class="card-title"><%= user.username %></h5>
+                <div>
+                    <%= link_to "Resend request", friendships_path(receiver_id: obj.receiver_id), data:{turbo_method: :post}, class: "btn btn-info me-1 p-1" %>
+                    <%= link_to "Cancel request", friendship_path(id: obj.id, receiver_id: obj.receiver_id), data:{turbo_method: :delete}, class:"btn btn-secondary p-1" %>
+                </div>
+            </div>
+        <% else %>
+            <h6 class="card-header fst-italic">Received <%= time_ago_in_words(obj.created_at) %> ago</h6>
+            <div class="card-body">
+                <% user = User.find(obj.sender_id) %>
+                <h5 class="card-title"><%= user.username %></h5>
+                <p class="card-text"><%= user.introduction %></p>
+                <div>
+                    <%= link_to "Accept request", friendship_path(sender_id: obj.sender_id), data:{turbo_method: :patch}, class:"btn btn-success me-1 p-1" %>
+                    <%= link_to "Reject request", friendships_path(id: obj.id, sender_id: obj.sender_id), data:{turbo_method: :delete}, class: "btn btn-warning p-1" %>
+                </div>
+            </div>
+        <% end %>
+    </div>
+</div>

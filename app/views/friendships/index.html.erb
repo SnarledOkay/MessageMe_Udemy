@@ -1,0 +1,17 @@
+<h1 class="text-center mt-3 mb-3">Received friend requests</h1>
+<% if !@received_requests.empty? %>
+    <% @received_requests.each do |req| %>
+        <%= render 'form', obj: req %>
+    <% end %>
+<% else %>
+    <h6 class="text-center text-secondary fst-italic">You have no friend request at the moment.</h6>
+<% end %>
+
+<h1 class="text-center mt-3 mb-3">Pending friend requests</h1>
+<% if !@sent_requests.empty? %>
+    <% @sent_requests.each do |req| %>
+        <%= render 'form', obj: req %>
+    <% end %>
+<% else %>
+    <h6 class="text-center text-secondary fst-italic">You have no pending request at the moment.</h6>
+<% end %>
