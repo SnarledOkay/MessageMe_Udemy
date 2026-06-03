@@ -1,0 +1,27 @@
+<div class="chatbox">
+    <div class="chatbox-header">
+        <div class="chatbox-avatar"></div>
+        <div class="chatbox-info">
+            <% if @chatroom.chatroom_type == "chat" %>
+                <% other_user = @chatroom.users.where.not(id: current_user.id).first %>
+                <%= link_to other_user.username, user_path(other_user), class:"user-info fw-bold" %>
+                <% if current_user.is_friend_with?(other_user) %>
+                    <% friendship = Friendship.find_by(receiver_id: current_user.id, sender_id: other_user.id, status: "accepted")
+                        .or(Friendship.find_by(receiver_id: other_user.id, sender_id: current_user.id, status: "accepted")).first %>
+                    <h6 class="user-add-info">Friend since <%= friendship.updated_at.to_date %></h6>
+                <% else %>
+                    <h6>Stranger</h6>
+                <% end %>
+            <% elsif @chatroom.chatroom_type == "groupchat" %>
+                <h4 class="user-info"><%= @chatroom.name %></h4>
+                <h6 class="user-add-info"><%= @chatroom.users.count %> member(s)</h6>
+            <% end %>
+        </div>
+    </div>
+    <div class="chatbox-display">
+        
+    </div>
+    <div class="chatbox-input">
+        
+    </div>
+</div>

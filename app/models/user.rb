@@ -20,13 +20,17 @@ class User < ApplicationRecord
     has_many :sent_request, through: :friendships, source: :receiver
     has_many :received_request, through: :friendships, source: :sender
 
+    has_many :memberships
+    has_many :chatrooms, through: :memberships
+    has_many :messages
+
     def sent_request_to?(other_user)
         friendships.exists?(receiver_id: other_user.id)
     end
     def receive_request_from?(other_user)
         friendships.exists?(sender_id: other_user.id)
     end
-    def friends_with?(other_user)
+    def is_friend_with?(other_user)
         friendships.exists?(receiver_id: other_user.id,status:"accepted") ||
         received_friendships.exists?(sender_id: other_user.id,status:"accepted")
     end

@@ -33,7 +33,7 @@
         </div>
         <% if current_user != @user %>
             <div class="text-center">
-                <% if !current_user.friends_with?(@user) %>
+                <% if !current_user.is_friend_with?(@user) %>
                     <% if current_user.receive_request_from?(@user) %>
                         <%= link_to "Accept friend request", friendship_path(sender_id: @user.id),data:{turbo_method: :patch},class:"btn btn-success" %>
                         <%= link_to "Reject friend request", friendships_path(sender_id: @user.id),data:{turbo_method: :delete}, class: "btn btn-warning" %>

@@ -1,0 +1,57 @@
+<%= link_to chatroom_path(obj), class: "chatroom-item #{obj.id == params[:id] ? "active" : ""} rounded" do %>
+    <div class="chatroom-avatar">
+        Hello
+    </div>
+    <div class="chatroom-info">
+        <div class="chatroom-name">
+            <% if obj.chatroom_type == "chat" %>
+                <% other_user = obj.users.where.not(id: current_user.id).first %>
+                <%= truncate(other_user.username, length: 28) %>
+            <% else %>
+                <%= truncate(obj.name, length: 28) %>
+            <% end %> 
+        </div>
+        <div class="chatroom-preview">
+            <% last_message = obj.messages.last %>
+            <% if last_message.message_type == "system" || last_message.user_id.nil? %>
+                <% message = "System: " + last_message.content %>
+                <%= truncate(message, length: 40) %>
+            <% else %>
+                <% if last_message.user_id == current_user.id %>
+                    <% message = "You: " + last_message.content %>
+                    <%= truncate(message, length: 40) %>
+                <% else %>
+                    <% sender = User.find(last_message.user_id) %>
+                    <% if sender %>
+                        <% message = sender.username + ": " + last_message.content %>
+                        <%= truncate(message, length: 40) %>
+                    <% else %>
+                        <% message = "[Deleted]: " + last_message.content %>
+                        <%= truncate(message, length: 40) %>
+                    <% end %>
+                <% end %>
+            <% end %>
+        </div>
+    </div>
+    <div class="chatbox-add-info">
+        <div class="chatroom-timestamp">
+            <% last_message_at = obj.messages.last.created_at %>
+            <% if Time.now - last_message_at < 60 %>
+                <%= "Just a few seconds ago" %>
+            <% else %>
+                <%= time_ago_in_words(last_message_at) + " ago" %>
+            <% end %>
+        </div>
+        <div class="chatroom-noti-count rounded">
+            <% membership = obj.memberships.find_by(user_id: current_user.id) %>
+            <% message_count = membership.unread_message_count %>
+            <% if message_count > 0 %>
+                <% if message_count > 99 %>
+                    <div>99+</div>
+                <% else %>
+                    <div><%= message_count.to_s %></div>
+                <% end %>
+            <% end %>
+        </div>
+    </div>
+<% end %>

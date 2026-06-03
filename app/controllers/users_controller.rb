@@ -19,7 +19,7 @@ class UsersController < ApplicationController
         @user = User.new(user_params)
         if @user.save
             session[:user_id] = @user.id
-            flash[:notice] = "Welcome to MessageMe"
+            flash[:notice] = "Welcome to MessageMe!"
             redirect_to chatrooms_path
         else
             render 'new'

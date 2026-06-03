@@ -1,0 +1,16 @@
+<div class="chatroom-index">
+  <div class="chatroom-search">
+    <input type="text" placeholder="Search chatroom" class="search-input" />
+  </div>
+
+  <div class="chatroom-header">
+    <div>Chatrooms</div>
+    <button class="btn btn-new-group btn-warning" title="New Group">+</button>
+  </div>
+
+  <div class="chatroom-list">
+    <% @chatrooms.each do |chatroom| %>
+      <%= render 'card', obj: chatroom %>
+    <% end %>
+  </div>
+</div>

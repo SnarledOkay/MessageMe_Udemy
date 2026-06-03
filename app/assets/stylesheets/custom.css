@@ -1,6 +1,11 @@
-#header-chatroom{
-  width: 200px;
-  height: auto;
+html,
+body {
+  height: 100% ;
+}
+
+#page-content {
+  flex: 1 0 auto;
+  background-color: lightgrey;
 }
 
 .nav-link{
@@ -27,6 +32,7 @@
   height: 100% ;
   /* Just gives the name of image, Rails will automatically handle it */
   background-image: url('zani.png');
+  /* background-image: url('lmao.png'); */
   background-position: center center;
   background-repeat: no-repeat;
   background-size:cover ;
@@ -66,14 +72,3 @@
   font-size: 17px;
   padding: 5px 10px 5px 10px ;
 }
-
-html,
-body {
-  height: 100% ;
-}
-
-#page-content {
-  flex: 1 0 auto;
-  background-color: lightgrey;
-}
-
