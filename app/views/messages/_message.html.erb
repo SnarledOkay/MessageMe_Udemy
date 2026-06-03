@@ -1,0 +1,38 @@
+<% if obj.message_type == "system" || obj.message_type.nil? %>
+    <div class="text-center fst-italic text-secondary"><%= obj.content %></div>
+<% else %>
+    <div class="message <%= obj.user_id == current_user.id ? 'by-me' : 'by-other' %>">
+        <% if obj.user_id == current_user.id %>
+            <div class="my-message rounded shadow">
+                <div class="message-content">
+                    <%= obj.content %>
+                </div>
+                <div class="my-message-timestamp">
+                    <% time_of_msg = obj.created_at %>
+                    <%= "#{time_of_msg.hour}:#{time_of_msg.min}" %>
+                </div>
+            </div> 
+        <% else %>
+            <% if @last_sender != obj.user_id %>
+                <div class="other-message-avatar">
+                    Hello
+                </div>
+            <% end %>
+            <div class="other-message rounded shadow">
+                <div class="other-message-title">
+                    <% sender = User.find(obj.user_id) %>
+                    <% membership = Membership.find_by(chatroom_id: obj.chatroom_id, user_id: obj.user_id) %>
+                    <% membership.role == "member" ? role = "Member" : role = "Admin" %>
+                    <%= sender.username + " (#{role})" %>
+                </div>
+                <div class="message-content">
+                    <%= obj.content %>
+                </div>
+                <div class="other-message-timestamp">
+                    <% time_of_msg = obj.created_at %>
+                    <%= "#{time_of_msg.hour}:#{time_of_msg.min}" %>
+                </div>
+            </div>
+        <% end %>
+    </div>
+<% end %>

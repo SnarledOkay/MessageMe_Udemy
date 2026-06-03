@@ -3,15 +3,61 @@
     background-color: lightcyan;
 }
 
+.chatbox-avatar{
+    height: 100% ; width: 55px ;
+    border-radius: 50%;
+    color: blue ; background-color: cyan;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+}
+
 .chatbox-header{
-    width: 100% ; height: 10% ;
+    width: 100% ; height: 64px ;
     background-color: aliceblue;
     padding-top: 5px ; padding-bottom: 5px ; padding-left: 15px ;
     border-bottom: 1px solid lightgray ;
+    font-family: Calibri, sans-serif;
+
+    display: flex;
+    align-items: center;
+    flex-direction: row;
 }
 
-.chatbox-add-info{
+.chatbox-info{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.chatbox-name{
+    height: 20px; 
+    width: auto ; min-width: 100px ;
+    display: flex;
+    align-items: center;
+    /* background-color: cyan; */
+
+    font-size: 18px ;
+    font-weight: 600 ;
+}
+
+.chatbox-tag{
+    font-size: 15px ;
+    height:15px ;
+    font-weight: 400;
+}
+
+.chatbox-display{
+    padding: 10px 15px 15px 15px ;
+    height: calc(100% - 134px) ;
     display: flex ;
     flex-direction: column;
-    margin: 0 ; padding: 0 ;
+}
+
+.chatbox-input{
+    height: 70px ;
+    background-color: aliceblue;
+    border-top: 1px solid lightgray ;
+    padding: 15px ;
 }
